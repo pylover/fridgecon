@@ -1,1 +1,7 @@
 .*.sw[op]
+out/*
+
+\#*\#
+fridgecon-backups/
+~*.lck
+
