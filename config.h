@@ -35,6 +35,7 @@ enum {
 
 #define RELAY GP4
 #define LED GP5
+#define TUNEFB GP3
 #define RELAY_SET(s) RELAY = !(s)
 #define RELAY_IS(s) (RELAY == !(s))
 #define LED_SET(s) LED = (s)

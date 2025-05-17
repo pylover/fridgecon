@@ -168,13 +168,33 @@ main(void) {
     T1CON = 0b00010001;
     TMR1_START();
 
-    /* IO */
-    TRISIO = 0b00000110;        // GP2: IN
-    ANSEL = 0b00110100;         // GP2->AN2
+    /* enable global pull up control active low: GPPU
+     * interrupt on rising edge of GP2
+     * internal clock
+     * prescaler is assigned to tmr0 module
+     * prescaller rate 1/8
+     */
+    OPTION_REG = 0b01000011;
 
-    OPTION_REG = 0b11010011;
+    /* GP0, 1 and 2 as input */
+    TRISIO = 0b00000111;
+
+    /* GP2 weak pullup */
+    WPU = 0b00000100;
+
+    /* adc configuration
+     *   7. right justified result format
+     *   6. vref pin enabled
+     * 3:2. analog channel selection: ch 00
+     *   0. ADON enable ADC module
+     */
+    ADCON0 = 0b11000001;
+
+    /* enable analog input for GP0/AN0
+     * ADC clock drived from internal clock < 500KH */
+    ANSEL = 0b00110001;
+
     CMCON = 0b00000111;
-    ADCON0 = 0b11001001;        // ADON, AN2, VDD
     VRCON = 0b00000000;
 
     ADIE = 1;
