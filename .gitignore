@@ -4,4 +4,4 @@ out/*
 \#*\#
 fridgecon-backups/
 ~*.lck
-
+_autosave-*

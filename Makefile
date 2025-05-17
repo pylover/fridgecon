@@ -17,8 +17,7 @@ CCARGS = \
 SERIALPORT = /dev/ttyACM0
 PGARGS = --quiet --pic-serial-port $(SERIALPORT)
 SRCS = \
-	main.c \
-	max7219.c
+	main.c
 
 
 all: main.hex
