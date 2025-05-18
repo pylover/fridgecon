@@ -135,9 +135,9 @@ isr(void) {
             LED_SET(!LED);
         }
     }
-    if (INTF) {
+    if (GPIF) {
         motor_off();
-        INTF = 0;
+        GPIF = 0;
     }
 }
 
@@ -172,18 +172,21 @@ main(void) {
 
     /* option reg
      * 7. enable global pull up control active low: GPPU
-     * 6. interrupt on rising edge of GP2
+     * 6. interrupt on falling edge of GP2, default.
      * internal clock
      * prescaler is assigned to tmr0 module
      * prescaller rate 1/8
      */
-    OPTION_REG = 0b01100011;
+    OPTION_REG = 0b01000011;
 
-    /* GP0, 1 and 2 as input */
-    TRISIO = 0b00000111;
+    /* GP0, 1 and 3 as input */
+    TRISIO = 0b00001011;
 
-    /* GP2 weak pullup */
-    WPU = 0b00000100;
+    /* GP3 weak pullup */
+    WPU = 0b00001000;
+
+    /* interrrupt on change GP3 */
+    IOC = 0b00001000;
 
     /* adc configuration
      *   7. right justified result format
@@ -199,22 +202,22 @@ main(void) {
 
     /* interrupt control
      * 7. GIE: Enables all unmasked interrupts
-     * 6. Enable all unmasked peripheral interrupts
-     * 5. Disable the TMR0 interrupt
-     * 4. Enables the GP2/INT external interrupt
-     * 3. Disables the GPIO port change interrupt
+     * 6. enable all unmasked peripheral interrupts
+     * 5. disable the TMR0 interrupt
+     * 4. disable the GP2/INT external interrupt
+     * 3. enable the GPIO port change interrupt
      * 2. TMR0 register did not overflow
      * 1. clear INTF
      * 0. GPIF None of the GP5:GP0 pins have changed state
      */
-    INTCON = 0b11010000;
+    INTCON = 0b11001000;
     CMCON = 0b00000000;
     // VRCON = 0b00000000;
 
     ADIE = 1;
     ADIF = 0;
 
-    TLED_SET(ON);
+    // TLED_SET(ON);
     RELAY_SET(OFF);
     GO_nDONE = 1;   // ADC enable
     long d = 0;

@@ -35,11 +35,11 @@ enum {
 
 #define RELAY GP4
 #define LED GP5
-#define TLED GP2
+// #define TLED GP2
 #define RELAY_SET(s) RELAY = !(s)
 #define RELAY_IS(s) (RELAY == !(s))
 #define LED_SET(s) LED = (s)
-#define TLED_SET(s) TLED = (s)
+// #define TLED_SET(s) TLED = (s)
 
 
 #endif  // CONFIG_H_
