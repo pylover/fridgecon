@@ -1,3 +1,2 @@
-- use internal voltage reference
 - tune push button
 - whatchdog

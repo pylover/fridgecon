@@ -49,6 +49,8 @@ static int adcval = 0;
 static long temp = 44;
 
 
+static signed char templ = DEFAULT_TL;
+static signed char temph = DEFAULT_TH;
 static bool motor_must = OFF;
 static bool motor_safe = NO;
 static unsigned long tmr1_ms = 0;
@@ -57,10 +59,6 @@ static unsigned long tmr1_us = 0;
 // #define TMR1MAX_US 262144
 #define TMR1MAX_US 131072
 // #define TMR1MAX_US 65536
-
-
-// static void
-// tmr1_arm(unsigned long
 
 
 const unsigned short tmr1_initial = 65536 - 50000;
@@ -137,15 +135,19 @@ isr(void) {
             LED_SET(!LED);
         }
     }
+    if (INTF) {
+        motor_off();
+        INTF = 0;
+    }
 }
 
 
 static void
 sample() {
-    if (temp < TL) {
+    if (temp < templ) {
         motor_off();
     }
-    else if (temp > TH) {
+    else if (temp > temph) {
         motor_on();
     }
 }
@@ -168,13 +170,14 @@ main(void) {
     T1CON = 0b00010001;
     TMR1_START();
 
-    /* enable global pull up control active low: GPPU
-     * interrupt on rising edge of GP2
+    /* option reg
+     * 7. enable global pull up control active low: GPPU
+     * 6. interrupt on rising edge of GP2
      * internal clock
      * prescaler is assigned to tmr0 module
      * prescaller rate 1/8
      */
-    OPTION_REG = 0b01000011;
+    OPTION_REG = 0b01100011;
 
     /* GP0, 1 and 2 as input */
     TRISIO = 0b00000111;
@@ -194,15 +197,24 @@ main(void) {
      * ADC clock drived from internal clock < 500KH */
     ANSEL = 0b00110001;
 
-    CMCON = 0b00000111;
-    VRCON = 0b00000000;
+    /* interrupt control
+     * 7. GIE: Enables all unmasked interrupts
+     * 6. Enable all unmasked peripheral interrupts
+     * 5. Disable the TMR0 interrupt
+     * 4. Enables the GP2/INT external interrupt
+     * 3. Disables the GPIO port change interrupt
+     * 2. TMR0 register did not overflow
+     * 1. clear INTF
+     * 0. GPIF None of the GP5:GP0 pins have changed state
+     */
+    INTCON = 0b11010000;
+    CMCON = 0b00000000;
+    // VRCON = 0b00000000;
 
     ADIE = 1;
     ADIF = 0;
-    PEIE = 1;
-    GIE = 1;
-    // TMR0 = 0;
 
+    TLED_SET(ON);
     RELAY_SET(OFF);
     GO_nDONE = 1;   // ADC enable
     long d = 0;
