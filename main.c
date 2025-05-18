@@ -179,8 +179,8 @@ main(void) {
      */
     OPTION_REG = 0b01000011;
 
-    /* GP0, 1 and 3 as input */
-    TRISIO = 0b00001011;
+    /* GP2, 1 and 3 as input */
+    TRISIO = 0b00001110;
 
     /* GP3 weak pullup */
     WPU = 0b00001000;
@@ -194,11 +194,11 @@ main(void) {
      * 3:2. analog channel selection: ch 00
      *   0. ADON enable ADC module
      */
-    ADCON0 = 0b11000001;
+    ADCON0 = 0b11001001;
 
-    /* enable analog input for GP0/AN0
+    /* enable analog input for GP2/AN2
      * ADC clock drived from internal clock < 500KH */
-    ANSEL = 0b00110001;
+    ANSEL = 0b00110100;
 
     /* interrupt control
      * 7. GIE: Enables all unmasked interrupts
