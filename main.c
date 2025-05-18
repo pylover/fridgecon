@@ -121,7 +121,7 @@ isr(void) {
     }
     if (TMR1IF) {
         tmr1_us += TMR1MAX_US;
-        // TMR1IF = 0;
+        TMR1IF = 0;
         if (tmr1_us >= MOTORON_DELAY) {
             tmr1_us = 0;
             TMR1_STOP();
@@ -136,7 +136,13 @@ isr(void) {
         }
     }
     if (GPIF) {
-        motor_off();
+        if (TBTN) {
+            TLED_SET(ON);
+            motor_off();
+        }
+        else {
+            TLED_SET(OFF);
+        }
         GPIF = 0;
     }
 }
@@ -157,6 +163,10 @@ void
 main(void) {
     /* Callibrate the 4MHZ internal oscilator */
     OSCCAL = 0b01001000;
+
+    /* comprator off */
+    CMCON = 0b00000111;
+    VRCON = 0b00000000;
 
     /* timer1 config
      *   7: unused
@@ -191,7 +201,7 @@ main(void) {
     /* adc configuration
      *   7. right justified result format
      *   6. vref pin enabled
-     * 3:2. analog channel selection: ch 00
+     * 3:2. analog channel selection: ch 10
      *   0. ADON enable ADC module
      */
     ADCON0 = 0b11001001;
@@ -211,14 +221,13 @@ main(void) {
      * 0. GPIF None of the GP5:GP0 pins have changed state
      */
     INTCON = 0b11001000;
-    CMCON = 0b00000000;
-    // VRCON = 0b00000000;
 
     ADIE = 1;
     ADIF = 0;
 
     // TLED_SET(ON);
     RELAY_SET(OFF);
+    TLED_SET(ON);
     GO_nDONE = 1;   // ADC enable
     long d = 0;
     while (1) {
