@@ -22,7 +22,7 @@ enum {
 #define ADC_OFFSET 50
 
 #define DEFAULT_TL -1
-#define DEFAULT_TH 3
+#define DEFAULT_TH 2
 
 
 #define MSECS(v) ((v) * 1000U)
@@ -35,12 +35,10 @@ enum {
 
 #define RELAY GP4
 #define LED GP5
-#define TLED GP0
 #define TBTN GP3
 #define RELAY_SET(s) RELAY = !(s)
 #define RELAY_IS(s) (RELAY == !(s))
 #define LED_SET(s) LED = (s)
-#define TLED_SET(s) TLED = (s)
 
 
 #endif  // CONFIG_H_

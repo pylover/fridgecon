@@ -2689,12 +2689,6 @@
 		(uuid "322f37a5-7c72-4920-8ce0-e1b56938e7b9")
 	)
 	(junction
-		(at 113.03 88.9)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "51be3aa2-5b1f-4c2c-8e41-fb255d8948c1")
-	)
-	(junction
 		(at 46.99 99.06)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2713,10 +2707,10 @@
 		(uuid "5d8d65aa-3294-4a84-98d7-618979002c2b")
 	)
 	(junction
-		(at 256.54 156.21)
+		(at 123.19 88.9)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8dd09f12-0ef9-438f-93de-56ccbcccaaf3")
+		(uuid "86c36a0b-6d1e-478a-a292-5aaf045a538b")
 	)
 	(junction
 		(at 237.49 82.55)
@@ -2729,12 +2723,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a84ad870-593c-4dfd-bc77-5056c870bf53")
-	)
-	(junction
-		(at 127 107.95)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "bc13eae4-f4d6-4bb5-b901-e0ab0bbb62d8")
 	)
 	(junction
 		(at 269.24 156.21)
@@ -2835,26 +2823,6 @@
 			(type default)
 		)
 		(uuid "00a784fa-4f5f-49be-8c29-49ec722d4e4c")
-	)
-	(wire
-		(pts
-			(xy 127 107.95) (xy 127 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "04ad2a5c-07b8-4cd7-b280-83bd0aa08005")
-	)
-	(wire
-		(pts
-			(xy 256.54 153.67) (xy 256.54 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "05d6790f-9a3a-4d1c-b296-6213ea834de9")
 	)
 	(wire
 		(pts
@@ -2968,16 +2936,6 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 133.35) (xy 130.81 113.03)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2043e5f6-1491-4708-bb97-3089f8b85051")
-	)
-	(wire
-		(pts
 			(xy 173.99 120.65) (xy 173.99 113.03)
 		)
 		(stroke
@@ -2988,7 +2946,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 107.95) (xy 166.37 127)
+			(xy 166.37 107.95) (xy 166.37 133.35)
 		)
 		(stroke
 			(width 0)
@@ -3078,16 +3036,6 @@
 	)
 	(wire
 		(pts
-			(xy 241.3 156.21) (xy 256.54 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ed6d047-e56d-49c5-abd7-6913eff1d71b")
-	)
-	(wire
-		(pts
 			(xy 46.99 99.06) (xy 46.99 100.33)
 		)
 		(stroke
@@ -3118,16 +3066,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 127) (xy 256.54 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "396e4586-d507-4d08-92c1-46b13db7000a")
-	)
-	(wire
-		(pts
 			(xy 55.88 80.01) (xy 55.88 78.74)
 		)
 		(stroke
@@ -3138,7 +3076,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 88.9) (xy 113.03 110.49)
+			(xy 123.19 88.9) (xy 123.19 110.49)
 		)
 		(stroke
 			(width 0)
@@ -3148,7 +3086,7 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 156.21) (xy 269.24 156.21)
+			(xy 241.3 156.21) (xy 269.24 156.21)
 		)
 		(stroke
 			(width 0)
@@ -3188,16 +3126,6 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 127) (xy 256.54 127)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "48bfe2fe-6748-4216-9b5e-144bbd8ffcf1")
-	)
-	(wire
-		(pts
 			(xy 237.49 95.25) (xy 237.49 101.6)
 		)
 		(stroke
@@ -3218,7 +3146,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 142.24) (xy 127 142.24)
+			(xy 105.41 142.24) (xy 123.19 142.24)
 		)
 		(stroke
 			(width 0)
@@ -3348,16 +3276,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 139.7) (xy 256.54 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6c82b01b-1e59-4bdb-903f-70866e640167")
-	)
-	(wire
-		(pts
 			(xy 261.62 67.31) (xy 270.51 67.31)
 		)
 		(stroke
@@ -3468,7 +3386,7 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 113.03) (xy 132.08 113.03)
+			(xy 123.19 113.03) (xy 132.08 113.03)
 		)
 		(stroke
 			(width 0)
@@ -3495,6 +3413,16 @@
 			(type default)
 		)
 		(uuid "82b31e55-dd37-4096-bee3-f43e748b0951")
+	)
+	(wire
+		(pts
+			(xy 123.19 142.24) (xy 123.19 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "82bd0807-ff1c-4fb5-8181-4b3991d6046d")
 	)
 	(wire
 		(pts
@@ -3608,7 +3536,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 110.49) (xy 132.08 110.49)
+			(xy 123.19 110.49) (xy 132.08 110.49)
 		)
 		(stroke
 			(width 0)
@@ -3668,7 +3596,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 88.9) (xy 113.03 88.9)
+			(xy 102.87 88.9) (xy 123.19 88.9)
 		)
 		(stroke
 			(width 0)
@@ -3788,7 +3716,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 127) (xy 185.42 127)
+			(xy 166.37 133.35) (xy 195.58 133.35)
 		)
 		(stroke
 			(width 0)
@@ -3888,16 +3816,6 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 133.35) (xy 130.81 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e626bf26-b14e-4d90-878c-9b677f16d633")
-	)
-	(wire
-		(pts
 			(xy 55.88 87.63) (xy 55.88 88.9)
 		)
 		(stroke
@@ -3918,7 +3836,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 68.58) (xy 113.03 88.9)
+			(xy 123.19 68.58) (xy 123.19 88.9)
 		)
 		(stroke
 			(width 0)
@@ -4161,7 +4079,7 @@
 		(uuid "189c22ab-ed7e-4c02-a64e-d2a25b5df4dc")
 	)
 	(label "PGCLK"
-		(at 113.03 68.58 90)
+		(at 123.19 68.58 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4271,7 +4189,7 @@
 		(uuid "8ad48943-a651-4607-a448-9f81bc387e51")
 	)
 	(label "Tune"
-		(at 194.31 133.35 0)
+		(at 195.58 133.35 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4300,16 +4218,6 @@
 		)
 		(uuid "c213851d-7cfa-4fb5-ab71-001c674ae00c")
 	)
-	(label "Tune Feedback"
-		(at 185.42 127 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cebb397a-aea9-4299-9cd2-01cb586d1710")
-	)
 	(label "Tune"
 		(at 207.01 133.35 0)
 		(effects
@@ -4319,16 +4227,6 @@
 			(justify left bottom)
 		)
 		(uuid "e7c90b59-3edb-43ec-8b95-05a1629c725a")
-	)
-	(label "Tune Feedback"
-		(at 207.01 127 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f592d861-f860-4342-a5b8-adf2ef578250")
 	)
 	(label "PGDATA"
 		(at 127 69.85 90)
@@ -4467,76 +4365,6 @@
 			(project "fridgecon"
 				(path "/51ae1284-16dc-47e6-a252-a589b4dac501"
 					(reference "#PWR4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:LED")
-		(at 256.54 149.86 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1827a73d-a29c-4e47-b837-ba32bf1c2eac")
-		(property "Reference" "D5"
-			(at 260.35 150.1774 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "LED"
-			(at 260.35 152.7174 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 256.54 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 256.54 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Light emitting diode"
-			(at 256.54 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "36d0a817-893f-42fb-8292-c2784262ddbf")
-		)
-		(pin "1"
-			(uuid "3cea457a-3e5e-4067-a4f6-10a351fbda49")
-		)
-		(instances
-			(project "fridgecon"
-				(path "/51ae1284-16dc-47e6-a252-a589b4dac501"
-					(reference "D5")
 					(unit 1)
 				)
 			)
@@ -5302,75 +5130,6 @@
 			(project "fridgecon"
 				(path "/51ae1284-16dc-47e6-a252-a589b4dac501"
 					(reference "J2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 256.54 135.89 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "87c59efb-7d2e-4128-8215-d0a95b3bea76")
-		(property "Reference" "R12"
-			(at 258.826 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1K"
-			(at 258.826 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 257.556 136.144 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 256.54 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 260.096 138.176 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "14f0dd25-332b-4b3c-9932-b93e9e11bfee")
-		)
-		(pin "2"
-			(uuid "6864e0da-779f-4050-a18f-4ea3591b8c16")
-		)
-		(instances
-			(project "fridgecon"
-				(path "/51ae1284-16dc-47e6-a252-a589b4dac501"
-					(reference "R12")
 					(unit 1)
 				)
 			)
