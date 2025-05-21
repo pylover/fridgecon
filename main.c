@@ -98,11 +98,15 @@ _init() {
 void __interrupt()
 isr(void) {
     if (GPIF) {
+        GPIF = 0;
+        if (_status == TUNNING) {
+            return;
+        }
         TMR1ON = 0;
+        _blinking = false;
         if (_status != TUNNING) {
             _status = TUNNING;
         }
-        GPIF = 0;
     }
 
     // if (ADIF) {
@@ -119,6 +123,9 @@ isr(void) {
 
 static void
 _blink(unsigned int countdown) {
+    if (countdown > 20) {
+        return;
+    }
     LED_SET(!LED);
     if (countdown == 0) {
         _blinking = false;
@@ -163,9 +170,8 @@ main(void) {
     LED_SET(OFF);
 
     // BLINKWAIT(10, 100, _blink);
-    BLINKWAIT(60, MILI(100), _blink);
-
 normal:
+    BLINKWAIT(20, MILI(100), _blink);
     _sample();
 
 // tunning:
@@ -177,11 +183,7 @@ normal:
     LED_SET(OFF);
     BLINKWAIT(2, MILI(50), _blink);
     _delaywdt(MILI(700));
-
     timer_async((unsigned int)abs(_limits.low) * 2, TICKS(MILI(300)), _tune);
     WAIT_WHILE(TUNNING);
-
-    _delaywdt(MILI(700));
-    BLINKWAIT(2, MILI(50), _blink);
     goto normal;
 }
