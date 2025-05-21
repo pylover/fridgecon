@@ -1,1 +1,2 @@
 - tune push button
+- power on reset
