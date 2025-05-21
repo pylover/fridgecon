@@ -10,7 +10,7 @@ timer_init(void);
 
 
 void
-timer_async(unsigned int count, unsigned int interval_ms, timercb_t cb,
+timer_async(unsigned int count, unsigned long interval_ms, timercb_t cb,
         void *state);
 
 

@@ -3,6 +3,7 @@
 #include "timer.h"
 
 
+
 enum status {
     BOOT,
     NORMAL,
@@ -10,7 +11,9 @@ enum status {
 };
 
 
+static signed char templ = DEFAULT_TL;
 static volatile enum status _status;
+#define WAIT_WHILE(s) while (_status == (s)) _delaywdt(MILI(100));
 
 
 static void
@@ -65,6 +68,7 @@ _init() {
      */
     INTCON = 0b11001000;
 
+    eeprom_init();
     timer_init();
 
     ADIE = 1;
@@ -76,6 +80,9 @@ void __interrupt()
 isr(void) {
     if (GPIF) {
         GPIF = 0;
+        if (_status != TUNNING) {
+            _status = TUNNING;
+        }
     }
 
     // if (ADIF) {
@@ -98,7 +105,20 @@ _blink(unsigned int countdown, void *s) {
 
 
 static void
+_tune(unsigned int countdown, void *s) {
+    LED_SET(!LED);
+    if (countdown == 0) {
+        _status = NORMAL;
+    }
+}
+
+
+static void
 _sample(void) {
+    while (_status == NORMAL) {
+      LED_SET(!LED);
+      _delaywdt(MILI(1000));
+    }
 }
 
 
@@ -113,16 +133,18 @@ main(void) {
 
     timer_async(20, 100, _blink, NULL);
 
-    while (_status == BOOT) { }
+    WAIT_WHILE(BOOT);
 
 normal:
     _sample();
 
-    if (_status != TUNNING) {
-        goto normal;
-    }
-
 // tunning:
+    LED_SET(OFF);
+    _delaywdt(SECOND(1));
+    timer_async((unsigned int)abs(templ) * 2 + 2, 300, _tune, NULL);
+    WAIT_WHILE(TUNNING);
+    _delaywdt(SECOND(1));
+    goto normal;
 
     // GO_nDONE = 1;   // ADC enable
     // long d = 0;

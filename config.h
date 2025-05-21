@@ -68,14 +68,15 @@ enum {
 #define DEFAULT_TH 2
 
 
-#define MILI(v) ((v) * 1000U)
-#define SECOND(v) ((v) * 1000000U)
+#define MILI(v) (((long)v) * 1000)
+#define SECOND(v) ((v) * 1000000)
 #define MINS(m) SECOND((m) * 60)
 
 
 #define MOTORON_DELAY SECS(10)
 
-#define TMR1_INTERVAL_MS 250
+#define TMR1_MAX ((short)65536)
+#define TMR1_INTERVAL_US 8
 #define RELAY GP4
 #define LED GP5
 #define TBTN GP3
