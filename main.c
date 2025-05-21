@@ -5,15 +5,19 @@
 
 
 enum status {
-    BOOT,
     NORMAL,
     TUNNING,
 };
 
 
-static struct limits limits;
+static volatile bool _blinking = false;
+static struct limits _limits;
 static volatile enum status _status;
 #define WAIT_WHILE(s) while (_status == (s)) _delaywdt(MILI(100));
+#define BLINKWAIT(n, i, c) \
+    _blinking = true; \
+    timer_async((n) * 2, i, c); \
+    while (_blinking) _delaywdt(MILI(50))
 
 
 static void
@@ -68,11 +72,13 @@ _init() {
      */
     INTCON = 0b11001000;
 
-    limits_load(&limits);
+    limits_load(&_limits);
     timer_init();
 
     ADIE = 1;
     ADIF = 0;
+
+    _status = NORMAL;
 }
 
 
@@ -96,22 +102,20 @@ isr(void) {
 
 
 static void
-_blink(unsigned int countdown, void *s) {
+_blink(unsigned int countdown) {
     LED_SET(!LED);
     if (countdown == 0) {
-        _status = NORMAL;
+        _blinking = false;
     }
 }
 
 
 static void
-_tune(unsigned int countdown, void *s) {
+_tune(unsigned int countdown) {
     LED_SET(!LED);
-    if (countdown) {
-        return;
+    if (countdown == 0) {
+        _status = NORMAL;
     }
-    limits.low--;
-    _status = NORMAL;
 }
 
 
@@ -131,22 +135,26 @@ main(void) {
     /* turn motor off */
     RELAY_SET(OFF);
     LED_SET(OFF);
-    _status = BOOT;
-
-    timer_async(20, 100, _blink, NULL);
-
-    WAIT_WHILE(BOOT);
+    BLINKWAIT(10, 100, _blink);
 
 normal:
     _sample();
 
 // tunning:
+    _limits.low--;
+    if (_limits.low < MIN_LT) {
+        _limits.low = MAX_LT;
+    }
+    limits_save(&_limits);
     LED_SET(OFF);
-    _delaywdt(SECOND(1));
-    timer_async((unsigned int)abs(limits.low) * 2 + 2, 300, _tune, NULL);
+    BLINKWAIT(2, 50, _blink);
+    _delaywdt(MILI(700));
+
+    timer_async((unsigned int)abs(_limits.low) * 2, 300, _tune);
     WAIT_WHILE(TUNNING);
-    limits_save(&limits);
-    _delaywdt(SECOND(1));
+
+    _delaywdt(MILI(700));
+    BLINKWAIT(2, 50, _blink);
     goto normal;
 
     // GO_nDONE = 1;   // ADC enable

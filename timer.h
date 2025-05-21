@@ -2,7 +2,7 @@
 #define TIMER_H_
 
 
-typedef void (*timercb_t) (unsigned int count, void *state);
+typedef void (*timercb_t) (unsigned int count);
 
 
 void
@@ -10,8 +10,7 @@ timer_init(void);
 
 
 void
-timer_async(unsigned int count, unsigned long interval_ms, timercb_t cb,
-        void *state);
+timer_async(unsigned int count, unsigned long interval_ms, timercb_t cb);
 
 
 void

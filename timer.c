@@ -2,7 +2,6 @@
 #include "timer.h"
 
 
-static void *_state;
 static timercb_t _cb;
 static unsigned int _count;
 static volatile unsigned long _ticks;
@@ -24,7 +23,6 @@ timer_init() {
     TMR1IE = 1;
     _count = 0;
     _cb = NULL;
-    _state = NULL;
 }
 
 
@@ -46,11 +44,9 @@ reset() {
 
 
 void
-timer_async(unsigned int count, unsigned long interval_ms, timercb_t cb,
-        void *state) {
+timer_async(unsigned int count, unsigned long interval_ms, timercb_t cb) {
     _count = count;
     _cb = cb;
-    _state = state;
     _interval_us = interval_ms * 1000;
 
     _ticks = _interval_us / TMR1_INTERVAL_US;
@@ -67,7 +63,7 @@ timer_tick() {
     }
 
     if (_cb) {
-        _cb(_count - 1, _state);
+        _cb(_count - 1);
     }
 
     if (_count == 1) {

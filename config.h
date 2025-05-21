@@ -64,6 +64,8 @@ enum {
 #define ADC_MAX 1024
 #define ADC_OFFSET 50
 
+#define MIN_LT -5
+#define MAX_LT -1
 #define DEFAULT_LT -1
 #define DEFAULT_HT 2
 
