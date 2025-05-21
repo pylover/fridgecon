@@ -18,6 +18,7 @@ SERIALPORT = /dev/ttyACM0
 PGARGS = --quiet --pic-serial-port $(SERIALPORT)
 SRCS = \
 	timer.c \
+	store.c \
 	main.c
 
 

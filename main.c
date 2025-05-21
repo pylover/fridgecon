@@ -1,5 +1,5 @@
-
 #include "config.h"
+#include "store.h"
 #include "timer.h"
 
 
@@ -11,7 +11,7 @@ enum status {
 };
 
 
-static signed char templ = DEFAULT_TL;
+static struct limits limits;
 static volatile enum status _status;
 #define WAIT_WHILE(s) while (_status == (s)) _delaywdt(MILI(100));
 
@@ -68,7 +68,7 @@ _init() {
      */
     INTCON = 0b11001000;
 
-    eeprom_init();
+    limits_load(&limits);
     timer_init();
 
     ADIE = 1;
@@ -107,9 +107,11 @@ _blink(unsigned int countdown, void *s) {
 static void
 _tune(unsigned int countdown, void *s) {
     LED_SET(!LED);
-    if (countdown == 0) {
-        _status = NORMAL;
+    if (countdown) {
+        return;
     }
+    limits.low--;
+    _status = NORMAL;
 }
 
 
@@ -141,8 +143,9 @@ normal:
 // tunning:
     LED_SET(OFF);
     _delaywdt(SECOND(1));
-    timer_async((unsigned int)abs(templ) * 2 + 2, 300, _tune, NULL);
+    timer_async((unsigned int)abs(limits.low) * 2 + 2, 300, _tune, NULL);
     WAIT_WHILE(TUNNING);
+    limits_save(&limits);
     _delaywdt(SECOND(1));
     goto normal;
 

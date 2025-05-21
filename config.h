@@ -64,8 +64,8 @@ enum {
 #define ADC_MAX 1024
 #define ADC_OFFSET 50
 
-#define DEFAULT_TL -1
-#define DEFAULT_TH 2
+#define DEFAULT_LT -1
+#define DEFAULT_HT 2
 
 
 #define MILI(v) (((long)v) * 1000)
