@@ -3,20 +3,20 @@
 #include "timer.h"
 
 
-
 enum status {
     NORMAL,
     TUNNING,
 };
 
 
+static long temp = 44;
 static volatile bool _blinking = false;
 static struct limits _limits;
 static volatile enum status _status;
 #define WAIT_WHILE(s) while (_status == (s)) _delaywdt(MILI(100));
 #define BLINKWAIT(n, i, c) \
     _blinking = true; \
-    timer_async((n) * 2, i, c); \
+    timer_async((n) * 2, TICKS(i), c); \
     while (_blinking) _delaywdt(MILI(50))
 
 
@@ -82,21 +82,37 @@ _init() {
 }
 
 
+// void inline
+// adc_isr() {
+//     int adcval;
+//
+//     adcval = ADRESH << 8;
+//     adcval += ADRESL;
+//     temp = adcval;
+//     temp *= VREF_MV;
+//     temp /= ADC_MAX;
+//     temp -= ADC_OFFSET;
+// }
+
+
 void __interrupt()
 isr(void) {
     if (GPIF) {
-        GPIF = 0;
+        TMR1ON = 0;
         if (_status != TUNNING) {
             _status = TUNNING;
         }
+        GPIF = 0;
     }
 
     // if (ADIF) {
     //     adc_isr();
+    //     ADIF = 0;
     // }
 
     if (TMR1IF) {
         timer_tick();
+        TMR1IF = 0;
     }
 }
 
@@ -122,8 +138,18 @@ _tune(unsigned int countdown) {
 static void
 _sample(void) {
     while (_status == NORMAL) {
-      LED_SET(!LED);
-      _delaywdt(MILI(1000));
+        // GO_nDONE = 1;   // ADC enable
+        // while (GO_nDONE == 1){
+        //     _delaywdt(100);
+        // }
+        LED_SET(!LED);
+        // if (temp < _limits.low) {
+        //     motor_off();
+        // }
+        // else if (temp > _limits.high) {
+        //     motor_on();
+        // }
+        _delaywdt(MILI(1000));
     }
 }
 
@@ -135,7 +161,9 @@ main(void) {
     /* turn motor off */
     RELAY_SET(OFF);
     LED_SET(OFF);
-    BLINKWAIT(10, 100, _blink);
+
+    // BLINKWAIT(10, 100, _blink);
+    BLINKWAIT(60, MILI(100), _blink);
 
 normal:
     _sample();
@@ -147,26 +175,13 @@ normal:
     }
     limits_save(&_limits);
     LED_SET(OFF);
-    BLINKWAIT(2, 50, _blink);
+    BLINKWAIT(2, MILI(50), _blink);
     _delaywdt(MILI(700));
 
-    timer_async((unsigned int)abs(_limits.low) * 2, 300, _tune);
+    timer_async((unsigned int)abs(_limits.low) * 2, TICKS(MILI(300)), _tune);
     WAIT_WHILE(TUNNING);
 
     _delaywdt(MILI(700));
-    BLINKWAIT(2, 50, _blink);
+    BLINKWAIT(2, MILI(50), _blink);
     goto normal;
-
-    // GO_nDONE = 1;   // ADC enable
-    // long d = 0;
-    // while (1) {
-    //     if (GO_nDONE == 1){
-    //         continue;
-    //     }
-    //     sample();
-    //     _delaywdt(SECS(1));
-    //     // LED_SET(!LED);
-    //     // _delaywdt(50463240);
-    //     GO_nDONE = 1;           // ADC enable
-    // }
 }

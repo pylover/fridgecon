@@ -1,5 +1,3 @@
-// static int adcval = 0;
-// static long temp = 44;
 //
 // static volatile unsigned long paused;
 // static volatile int tblink;
@@ -55,18 +53,6 @@
 //         RELAY_SET(OFF);
 //         TMR1_START();
 //     }
-// }
-//
-//
-// void inline
-// adc_isr() {
-//     adcval = ADRESH << 8;
-//     adcval += ADRESL;
-//     temp = adcval;
-//     temp *= VREF_MV;
-//     temp /= ADC_MAX;
-//     temp -= ADC_OFFSET;
-//     ADIF = 0;
 // }
 //
 //
@@ -129,12 +115,6 @@
 //         return;
 //     }
 //
-//     if (temp < templ) {
-//         motor_off();
-//     }
-//     else if (temp > temph) {
-//         motor_on();
-//     }
 // }
 
 

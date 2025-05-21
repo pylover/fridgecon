@@ -5,7 +5,6 @@
 struct limits {
     char magic;
     signed char low;
-    signed char high;
 };
 
 

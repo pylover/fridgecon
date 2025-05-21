@@ -4,8 +4,8 @@
 
 static timercb_t _cb;
 static unsigned int _count;
+static volatile unsigned long _initialticks;
 static volatile unsigned long _ticks;
-static unsigned long _interval_us;
 
 
 void
@@ -37,19 +37,17 @@ reset() {
     }
     _ticks -= v;
     v = TMR1_MAX - v;
-    TMR1IF = 0;
     TMR1H = (unsigned char)(v >> 8);
     TMR1L = (unsigned char)(v << 8);
 }
 
 
 void
-timer_async(unsigned int count, unsigned long interval_ms, timercb_t cb) {
+timer_async(unsigned int count, unsigned long ticks, timercb_t cb) {
     _count = count;
     _cb = cb;
-    _interval_us = interval_ms * 1000;
-
-    _ticks = _interval_us / TMR1_INTERVAL_US;
+    _initialticks = ticks;
+    _ticks = ticks;
     reset();
     TMR1ON = 1;
 }
@@ -68,11 +66,10 @@ timer_tick() {
 
     if (_count == 1) {
         TMR1ON = 0;
-        TMR1IF = 0;
         return;
     }
 
     _count--;
-    _ticks = _interval_us / TMR1_INTERVAL_US;
+    _ticks = _initialticks;
     reset();
 }

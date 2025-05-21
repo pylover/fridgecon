@@ -5,12 +5,15 @@
 typedef void (*timercb_t) (unsigned int count);
 
 
+#define TICKS(us) ((us) / TMR1_INTERVAL_US)
+
+
 void
 timer_init(void);
 
 
 void
-timer_async(unsigned int count, unsigned long interval_ms, timercb_t cb);
+timer_async(unsigned int count, unsigned long ticks, timercb_t cb);
 
 
 void
