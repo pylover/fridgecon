@@ -48,37 +48,26 @@
 #include <xc.h>
 #include <stdbool.h>
 
+#include "helpers.h"
+
 
 enum {
     OFF = 0,
-    ON = 1,
-};
-
-
-enum {
     NO = 0,
+    ON = 1,
     YES = 1,
 };
 
 #define VREF_MV 476
 #define ADC_MAX 1024
-#define ADC_OFFSET 50
-
-#define MIN_LT -5
-#define MAX_LT -1
-#define DEFAULT_LT -1
-#define DEFAULT_HT 2
 
 
-#define MILI(v) (((long)v) * 1000)
-#define SECOND(v) ((v) * 1000000)
-#define MINS(m) SECOND((m) * 60)
+#define OFFTEMP_MIN -5
+#define OFFTEMP_MAX -1
+#define OFFTEMP_DEFAULT -1
+#define MOTORON_DELAY (unsigned int)SECOND(10)
 
 
-#define MOTORON_DELAY SECS(10)
-
-#define TMR1_MAX ((short)65536)
-#define TMR1_INTERVAL_US 8
 #define RELAY GP4
 #define LED GP5
 #define TBTN GP3

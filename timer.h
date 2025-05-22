@@ -5,6 +5,8 @@
 typedef void (*timercb_t) (unsigned int count);
 
 
+#define TMR1_MAX ((short)65536)
+#define TMR1_INTERVAL_US 8
 #define TICKS(us) ((us) / TMR1_INTERVAL_US)
 
 

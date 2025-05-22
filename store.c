@@ -10,7 +10,7 @@ void
 limits_load(struct limits *out) {
     unsigned char magic = eeprom_read(_LIMITS_EEPROMADDR);
     if (magic != _MAGIC) {
-        out->low = DEFAULT_LT;
+        out->low = OFFTEMP_DEFAULT;
         limits_save(out);
         return;
     }

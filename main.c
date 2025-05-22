@@ -150,13 +150,13 @@ main(void) {
 
     // BLINKWAIT(10, 100, _blink);
 normal:
-    BLINKWAIT(20, MILI(100), _blink);
+    BLINKWAIT(MOTORON_DELAY * 10, MILI(100), _blink);
     _sample();
 
 // tunning:
     _limits.low--;
-    if (_limits.low < MIN_LT) {
-        _limits.low = MAX_LT;
+    if (_limits.low < OFFTEMP_MIN) {
+        _limits.low = OFFTEMP_MAX;
     }
     limits_save(&_limits);
     LED_SET(OFF);
