@@ -6,20 +6,19 @@
 #define _LIMITS_EEPROMADDR 5
 
 
-void
-limits_load(struct limits *out) {
+signed char
+offtemp_load() {
     unsigned char magic = eeprom_read(_LIMITS_EEPROMADDR);
     if (magic != _MAGIC) {
-        out->low = OFFTEMP_DEFAULT;
-        limits_save(out);
-        return;
+        offtemp_save(OFFTEMP_DEFAULT);
+        return OFFTEMP_DEFAULT;
     }
-    out->low = (signed char)eeprom_read(_LIMITS_EEPROMADDR + 1);
+    return (signed char)eeprom_read(_LIMITS_EEPROMADDR + 1);
 }
 
 
 void
-limits_save(struct limits *out) {
+offtemp_save(signed char t) {
     eeprom_write(_LIMITS_EEPROMADDR, _MAGIC);
-    eeprom_write(_LIMITS_EEPROMADDR + 1, (char)out->low);
+    eeprom_write(_LIMITS_EEPROMADDR + 1, (char)t);
 }

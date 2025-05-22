@@ -6,7 +6,7 @@
 static __bit _blinking;
 static __bit _tunning;
 static volatile int adcval;
-static struct limits _limits;
+static signed char _offtemp;
 #define RELAY GP4
 #define LED GP5
 #define TBTN GP3
@@ -68,7 +68,7 @@ _init() {
      */
     INTCON = 0b11001000;
 
-    limits_load(&_limits);
+    _offtemp = offtemp_load();
     timer_init();
 
     ADIE = 1;
@@ -156,15 +156,15 @@ normal:
     _sample();
 
     /* tunning */
-    _limits.low--;
-    if (_limits.low < OFFTEMP_MIN) {
-        _limits.low = OFFTEMP_MAX;
+    _offtemp--;
+    if (_offtemp < OFFTEMP_MIN) {
+        _offtemp = OFFTEMP_MAX;
     }
-    limits_save(&_limits);
+    offtemp_save(_offtemp);
     LED = OFF;
     BLINKWAIT(2, MILI(50), _blink);
     _delaywdt(MILI(700));
-    timer_async((unsigned int)abs(_limits.low) * 2, TICKS(MILI(300)), _tune);
+    timer_async((unsigned int)abs(_offtemp) * 2, TICKS(MILI(300)), _tune);
     while (_tunning) {
         _delaywdt(MILI(100));
     }

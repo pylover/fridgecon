@@ -2,17 +2,12 @@
 #define STORE_H_
 
 
-struct limits {
-    signed char low;
-};
+signed char
+offtemp_load();
 
 
 void
-limits_load(struct limits *l);
-
-
-void
-limits_save(struct limits *l);
+offtemp_save(signed char t);
 
 
 #endif  // STORE_H_
