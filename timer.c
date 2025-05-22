@@ -29,12 +29,7 @@ timer_init() {
 inline void
 reset() {
     unsigned short v;
-    if (_ticks > TMR1_MAX) {
-        v = (unsigned short)_ticks;
-    }
-    else {
-        v = TMR1_MAX;
-    }
+    v = _ticks > TMR1_MAX? (unsigned short)_ticks: TMR1_MAX;
     _ticks -= v;
     v = TMR1_MAX - v;
     TMR1H = (unsigned char)(v >> 8);
@@ -56,8 +51,7 @@ timer_async(unsigned int count, unsigned long ticks, timercb_t cb) {
 void
 timer_tick() {
     if (_ticks) {
-        reset();
-        return;
+        goto again;
     }
 
     if (_cb) {
@@ -71,5 +65,7 @@ timer_tick() {
 
     _count--;
     _ticks = _initialticks;
+
+again:
     reset();
 }

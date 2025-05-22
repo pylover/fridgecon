@@ -9,7 +9,7 @@ enum status {
 };
 
 
-static long temp = 44;
+static volatile int adcval = 1024;
 static volatile bool _blinking = false;
 static struct limits _limits;
 static volatile enum status _status;
@@ -82,19 +82,6 @@ _init() {
 }
 
 
-// void inline
-// adc_isr() {
-//     int adcval;
-//
-//     adcval = ADRESH << 8;
-//     adcval += ADRESL;
-//     temp = adcval;
-//     temp *= VREF_MV;
-//     temp /= ADC_MAX;
-//     temp -= ADC_OFFSET;
-// }
-
-
 void __interrupt()
 isr(void) {
     if (GPIF) {
@@ -109,10 +96,14 @@ isr(void) {
         }
     }
 
-    // if (ADIF) {
-    //     adc_isr();
-    //     ADIF = 0;
-    // }
+    if (ADIF) {
+        adcval = ADRESH << 8;
+        adcval += ADRESL;
+        // temp *= VREF_MV;
+        // temp /= ADC_MAX;
+        // temp -= ADC_OFFSET;
+        ADIF = 0;
+    }
 
     if (TMR1IF) {
         timer_tick();
