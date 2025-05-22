@@ -7,6 +7,9 @@ static __bit _blinking;
 static __bit _tunning;
 static volatile int adcval;
 static struct limits _limits;
+#define RELAY GP4
+#define LED GP5
+#define TBTN GP3
 #define BLINKWAIT(n, i, c) \
     _blinking = true; \
     timer_async((n) * 2, TICKS(i), c); \
@@ -105,7 +108,7 @@ _blink(unsigned int countdown) {
     if (countdown > 20) {
         return;
     }
-    LED_SET(!LED);
+    LED ^= 1;
     if (countdown == 0) {
         _blinking = false;
     }
@@ -114,7 +117,7 @@ _blink(unsigned int countdown) {
 
 static void
 _tune(unsigned int countdown) {
-    LED_SET(!LED);
+    LED ^= 1;
     if (countdown == 0) {
         _tunning = false;
     }
@@ -128,7 +131,7 @@ _sample(void) {
         // while (GO_nDONE == 1){
         //     _delaywdt(100);
         // }
-        LED_SET(!LED);
+        LED ^= 1;
         // if (temp < _limits.low) {
         //     motor_off();
         // }
@@ -146,20 +149,19 @@ main(void) {
 
     /* turn motor off */
     RELAY_SET(OFF);
-    LED_SET(OFF);
+    LED = OFF;
 
-    // BLINKWAIT(10, 100, _blink);
 normal:
-    BLINKWAIT(MOTORON_DELAY * 10, MILI(100), _blink);
+    BLINKWAIT(MOTORON_DELAY_S * 10, MILI(100), _blink);
     _sample();
 
-// tunning:
+    /* tunning */
     _limits.low--;
     if (_limits.low < OFFTEMP_MIN) {
         _limits.low = OFFTEMP_MAX;
     }
     limits_save(&_limits);
-    LED_SET(OFF);
+    LED = OFF;
     BLINKWAIT(2, MILI(50), _blink);
     _delaywdt(MILI(700));
     timer_async((unsigned int)abs(_limits.low) * 2, TICKS(MILI(300)), _tune);

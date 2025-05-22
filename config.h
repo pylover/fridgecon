@@ -65,15 +65,11 @@ enum {
 #define OFFTEMP_MIN -5
 #define OFFTEMP_MAX -1
 #define OFFTEMP_DEFAULT -1
-#define MOTORON_DELAY (unsigned int)SECOND(10)
+#define MOTORON_DELAY_S 2
 
 
-#define RELAY GP4
-#define LED GP5
-#define TBTN GP3
 #define RELAY_SET(s) RELAY = !(s)
 #define RELAY_IS(s) (RELAY == !(s))
-#define LED_SET(s) LED = (s)
 
 
 #endif  // CONFIG_H_
