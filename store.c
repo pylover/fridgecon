@@ -8,8 +8,8 @@
 
 void
 limits_load(struct limits *out) {
-    out->magic = eeprom_read(_LIMITS_EEPROMADDR);
-    if (out->magic != _MAGIC) {
+    unsigned char magic = eeprom_read(_LIMITS_EEPROMADDR);
+    if (magic != _MAGIC) {
         out->low = DEFAULT_LT;
         limits_save(out);
         return;
@@ -20,7 +20,6 @@ limits_load(struct limits *out) {
 
 void
 limits_save(struct limits *out) {
-    out->magic = _MAGIC;
-    eeprom_write(_LIMITS_EEPROMADDR, out->magic);
+    eeprom_write(_LIMITS_EEPROMADDR, _MAGIC);
     eeprom_write(_LIMITS_EEPROMADDR + 1, (char)out->low);
 }

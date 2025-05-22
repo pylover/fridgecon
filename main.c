@@ -3,17 +3,10 @@
 #include "timer.h"
 
 
-enum status {
-    NORMAL,
-    TUNNING,
-};
-
-
+static __bit _blinking;
+static __bit _tunning;
 static volatile int adcval;
-static volatile bool _blinking;
 static struct limits _limits;
-static volatile enum status _status = NORMAL;
-#define WAIT_WHILE(s) while (_status == (s)) _delaywdt(MILI(100));
 #define BLINKWAIT(n, i, c) \
     _blinking = true; \
     timer_async((n) * 2, TICKS(i), c); \
@@ -83,14 +76,12 @@ void __interrupt()
 isr(void) {
     if (GPIF) {
         GPIF = 0;
-        if (_status == TUNNING) {
+        if (_tunning) {
             return;
         }
         TMR1ON = 0;
         _blinking = false;
-        if (_status != TUNNING) {
-            _status = TUNNING;
-        }
+        _tunning = true;
     }
 
     if (ADIF) {
@@ -125,14 +116,14 @@ static void
 _tune(unsigned int countdown) {
     LED_SET(!LED);
     if (countdown == 0) {
-        _status = NORMAL;
+        _tunning = false;
     }
 }
 
 
 static void
 _sample(void) {
-    while (_status == NORMAL) {
+    while (!_tunning) {
         // GO_nDONE = 1;   // ADC enable
         // while (GO_nDONE == 1){
         //     _delaywdt(100);
@@ -172,6 +163,8 @@ normal:
     BLINKWAIT(2, MILI(50), _blink);
     _delaywdt(MILI(700));
     timer_async((unsigned int)abs(_limits.low) * 2, TICKS(MILI(300)), _tune);
-    WAIT_WHILE(TUNNING);
+    while (_tunning) {
+        _delaywdt(MILI(100));
+    }
     goto normal;
 }
