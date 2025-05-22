@@ -21,19 +21,6 @@ timer_init() {
      */
     T1CON = 0b00110001;
     TMR1IE = 1;
-    _count = 0;
-    _cb = NULL;
-}
-
-
-inline void
-reset() {
-    unsigned short v;
-    v = _ticks > TMR1_MAX? (unsigned short)_ticks: TMR1_MAX;
-    _ticks -= v;
-    v = TMR1_MAX - v;
-    TMR1H = (unsigned char)(v >> 8);
-    TMR1L = (unsigned char)(v << 8);
 }
 
 
@@ -43,13 +30,16 @@ timer_async(unsigned int count, unsigned long ticks, timercb_t cb) {
     _cb = cb;
     _initialticks = ticks;
     _ticks = ticks;
-    reset();
+    TMR1H = 0xff;
+    TMR1L = 0xff;
     TMR1ON = 1;
 }
 
 
 void
 timer_tick() {
+    unsigned short step;
+
     if (_ticks) {
         goto again;
     }
@@ -67,5 +57,9 @@ timer_tick() {
     _ticks = _initialticks;
 
 again:
-    reset();
+    step = _ticks > TMR1_MAX? (unsigned short)_ticks: TMR1_MAX;
+    _ticks -= step;
+    step = TMR1_MAX - step;
+    TMR1H = (unsigned char)(step >> 8);
+    TMR1L = (unsigned char)(step << 8);
 }

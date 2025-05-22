@@ -9,10 +9,10 @@ enum status {
 };
 
 
-static volatile int adcval = 1024;
-static volatile bool _blinking = false;
+static volatile int adcval;
+static volatile bool _blinking;
 static struct limits _limits;
-static volatile enum status _status;
+static volatile enum status _status = NORMAL;
 #define WAIT_WHILE(s) while (_status == (s)) _delaywdt(MILI(100));
 #define BLINKWAIT(n, i, c) \
     _blinking = true; \
@@ -76,9 +76,6 @@ _init() {
     timer_init();
 
     ADIE = 1;
-    ADIF = 0;
-
-    _status = NORMAL;
 }
 
 

@@ -1,4 +1,3 @@
-//
 // static volatile unsigned long paused;
 // static volatile int tblink;
 // static signed char templ = DEFAULT_TL;
@@ -96,26 +95,3 @@
 //     //     LED_SET(!LED);
 //     // }
 // }
-//
-//
-// void inline
-// gpio_isr() {
-//     status = TUNNING;
-//     tblink = abs(templ) + 1;
-//     LED_SET(ON);
-//     TMR1_START();
-// }
-//
-//
-//
-//
-// static void
-// sample() {
-//     if (paused) {
-//         return;
-//     }
-//
-// }
-
-
-
