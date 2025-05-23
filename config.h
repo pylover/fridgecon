@@ -44,32 +44,24 @@
 // Use project enums instead of #define for ON and OFF.
 
 
-
 #include <xc.h>
 #include <stdbool.h>
 
 #include "helpers.h"
 
 
-enum {
-    OFF = 0,
-    NO = 0,
-    ON = 1,
-    YES = 1,
-};
-
 #define VREF_MV 476
 #define ADC_MAX 1024
+
+/* ADC_MAX / VREF_MV */
+#define ADC_FACTOR 22
+#define ADC_OFFSET_CELSIUS -5
 
 
 #define OFFTEMP_MIN -5
 #define OFFTEMP_MAX -1
 #define OFFTEMP_DEFAULT -1
 #define MOTORON_DELAY_S 2
-
-
-#define RELAY_SET(s) RELAY = !(s)
-#define RELAY_IS(s) (RELAY == !(s))
 
 
 #endif  // CONFIG_H_

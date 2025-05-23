@@ -5,11 +5,14 @@
 
 static __bit _blinking;
 static __bit _tunning;
-static volatile int adcval;
+static volatile signed char temp;
 static signed char _offtemp;
-#define RELAY GP4
-#define LED GP5
-#define TBTN GP3
+#define _RELAY GP4
+#define _LED GP5
+#define _TBTN GP3
+#define RELAY_SET(s) _RELAY = !(s)
+#define LED_SET(s) _LED = (s)
+#define LED_TOGGLE(s) _LED ^= 1
 #define BLINKWAIT(n, i, c) \
     _blinking = true; \
     timer_async((n) * 2, TICKS(i), c); \
@@ -77,6 +80,8 @@ _init() {
 
 void __interrupt()
 isr(void) {
+    unsigned short adcval;
+
     if (GPIF) {
         GPIF = 0;
         if (_tunning) {
@@ -88,11 +93,10 @@ isr(void) {
     }
 
     if (ADIF) {
-        adcval = ADRESH << 8;
-        adcval += ADRESL;
-        // temp *= VREF_MV;
-        // temp /= ADC_MAX;
-        // temp -= ADC_OFFSET;
+        adcval = (unsigned short)ADRESH << 8;
+        adcval += (unsigned short)ADRESL;
+        temp = (signed char) (adcval / ADC_FACTOR);
+        temp += ADC_OFFSET_CENSIUS;
         ADIF = 0;
     }
 
@@ -108,7 +112,7 @@ _blink(unsigned int countdown) {
     if (countdown > 20) {
         return;
     }
-    LED ^= 1;
+    LED_TOGGLE();
     if (countdown == 0) {
         _blinking = false;
     }
@@ -117,7 +121,7 @@ _blink(unsigned int countdown) {
 
 static void
 _tune(unsigned int countdown) {
-    LED ^= 1;
+    LED_TOGGLE();
     if (countdown == 0) {
         _tunning = false;
     }
@@ -131,7 +135,7 @@ _sample(void) {
         // while (GO_nDONE == 1){
         //     _delaywdt(100);
         // }
-        LED ^= 1;
+        LED_TOGGLE();
         // if (temp < _limits.low) {
         //     motor_off();
         // }
@@ -147,11 +151,10 @@ void
 main(void) {
     _init();
 
+normal:
     /* turn motor off */
     RELAY_SET(OFF);
-    LED = OFF;
-
-normal:
+    LED_SET(OFF);
     BLINKWAIT(MOTORON_DELAY_S * 10, MILI(100), _blink);
     _sample();
 
@@ -161,7 +164,7 @@ normal:
         _offtemp = OFFTEMP_MAX;
     }
     offtemp_save(_offtemp);
-    LED = OFF;
+    LED_SET(OFF);
     BLINKWAIT(2, MILI(50), _blink);
     _delaywdt(MILI(700));
     timer_async((unsigned int)abs(_offtemp) * 2, TICKS(MILI(300)), _tune);

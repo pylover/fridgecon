@@ -3,7 +3,7 @@
 
 
 signed char
-offtemp_load();
+offtemp_load(void);
 
 
 void

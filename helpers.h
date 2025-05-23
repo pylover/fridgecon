@@ -7,4 +7,12 @@
 #define MINS(m) SECOND((m) * 60)
 
 
+enum {
+    OFF = 0,
+    NO = 0,
+    ON = 1,
+    YES = 1,
+};
+
+
 #endif  // HELPERS_H_
