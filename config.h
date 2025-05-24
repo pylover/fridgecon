@@ -61,6 +61,7 @@
 #define OFFTEMP_MIN -5
 #define OFFTEMP_MAX -1
 #define OFFTEMP_DEFAULT -1
+#define ONTEMP 4
 #define MOTORON_DELAY_S 2
 
 

@@ -10,7 +10,7 @@ static signed char _offtemp;
 #define _RELAY GP4
 #define _LED GP5
 #define _TBTN GP3
-#define RELAY_SET(s) _RELAY = !(s)
+#define MOTOR_SET(s) _RELAY = !(s)
 #define LED_SET(s) _LED = (s)
 #define LED_TOGGLE(s) _LED ^= 1
 #define BLINKWAIT(n, i, c) \
@@ -96,7 +96,7 @@ isr(void) {
         adcval = (unsigned short)ADRESH << 8;
         adcval += (unsigned short)ADRESL;
         temp = (signed char) (adcval / ADC_FACTOR);
-        temp += ADC_OFFSET_CENSIUS;
+        temp += ADC_OFFSET_CELSIUS;
         ADIF = 0;
     }
 
@@ -128,22 +128,23 @@ _tune(unsigned int countdown) {
 }
 
 
-static void
+static int
 _sample(void) {
     while (!_tunning) {
-        // GO_nDONE = 1;   // ADC enable
-        // while (GO_nDONE == 1){
-        //     _delaywdt(100);
-        // }
+        GO_nDONE = 1;   // ADC enable
+        while (GO_nDONE == 1){
+            _delaywdt(100);
+        }
         LED_TOGGLE();
-        // if (temp < _limits.low) {
-        //     motor_off();
-        // }
-        // else if (temp > _limits.high) {
-        //     motor_on();
-        // }
+        if (temp < _offtemp) {
+            return 1;
+        }
+        else if (temp > ONTEMP) {
+            MOTOR_SET(ON);
+        }
         _delaywdt(MILI(1000));
     }
+    return 0;
 }
 
 
@@ -152,11 +153,13 @@ main(void) {
     _init();
 
 normal:
-    /* turn motor off */
-    RELAY_SET(OFF);
+    /* turn compressor off */
+    MOTOR_SET(OFF);
     LED_SET(OFF);
     BLINKWAIT(MOTORON_DELAY_S * 10, MILI(100), _blink);
-    _sample();
+    if (_sample()) {
+        goto normal;
+    }
 
     /* tunning */
     _offtemp--;
