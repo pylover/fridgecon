@@ -1,4 +1,10 @@
 # fridgecon
+Simple refrigerator controller.
+
+
+## Schematic
+![fridgecon-circuit](https://github.com/pylover/fridgecon/blob/master/schematic/schematic.png)
+
 
 ## Build
 
