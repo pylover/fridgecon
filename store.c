@@ -1,4 +1,6 @@
-#include "config.h"
+#include <xc.h>
+
+#include "userconfig.h"
 #include "store.h"
 
 

@@ -1,4 +1,7 @@
-#include "config.h"
+/* configuration bits must be define before any include */
+#include "configbits.h"
+#include "userconfig.h"
+#include <xc.h>
 #include "store.h"
 #include "timer.h"
 
@@ -96,7 +99,7 @@ isr(void) {
         adcval = (unsigned short)ADRESH << 8;
         adcval += (unsigned short)ADRESL;
         temp = (signed char) (adcval / ADC_FACTOR);
-        temp += ADC_OFFSET_CELSIUS;
+        temp += TEMP_OFFSET_CELSIUS;
         ADIF = 0;
     }
 

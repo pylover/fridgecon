@@ -1,9 +1,9 @@
-#ifndef CONFIG_H_
-#define CONFIG_H_
+#ifndef CONFIGBITS_H_
+#define CONFIGBITS_H_
 
 // PIC12F675 Configuration Bit Settings
-
 // 'C' source line config statements
+
 
 // BEGIN CONFIG
 // 100 = INTOSC oscillator: I/O function on GP4/OSC2/CLKOUT pin, I/O function on GP5/OSC1/CLKIN
@@ -44,27 +44,4 @@
 // Use project enums instead of #define for ON and OFF.
 
 
-#include <xc.h>
-#include <stdbool.h>
-
-#include "helpers.h"
-
-
-#define VREF_MV 476
-#define ADC_MAX 1024
-
-/* ADC_MAX / VREF_MV */
-#define ADC_FACTOR 22
-#define ADC_OFFSET_CELSIUS -5
-
-
-#define OFFTEMP_MIN -5
-#define OFFTEMP_MAX -1
-#define OFFTEMP_DEFAULT -1
-#define ONTEMP 4
-// #define MOTORON_DELAY_S (60 * 3)
-// #define MOTORON_DELAY_S 2
-#define MOTORON_DELAY_S 30
-
-
-#endif  // CONFIG_H_
+#endif  // CONFIGBITS_H_
