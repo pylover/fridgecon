@@ -4,7 +4,7 @@
 
 #define MILI(v) (((long)v) * 1000)
 #define SECOND(v) ((v) * 1000000)
-#define MINS(m) SECOND((m) * 60)
+#define MINUTE(m) SECOND((m) * 60)
 
 
 enum {

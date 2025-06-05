@@ -109,9 +109,6 @@ isr(void) {
 
 static void
 _blink(unsigned int countdown) {
-    if (countdown > 20) {
-        return;
-    }
     LED_TOGGLE();
     if (countdown == 0) {
         _blinking = false;
@@ -156,6 +153,7 @@ normal:
     /* turn compressor off */
     MOTOR_SET(OFF);
     LED_SET(OFF);
+    _delaywdt(SECOND(2));
     BLINKWAIT(MOTORON_DELAY_S * 10, MILI(100), _blink);
     if (_sample()) {
         goto normal;

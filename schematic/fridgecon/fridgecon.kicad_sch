@@ -4,6 +4,10 @@
 	(generator_version "8.0")
 	(uuid "51ae1284-16dc-47e6-a252-a589b4dac501")
 	(paper "A4")
+	(title_block
+		(title "Mini car refridgerator controller.")
+		(rev "1.0")
+	)
 	(lib_symbols
 		(symbol "Connector:Conn_01x05_Socket"
 			(pin_names
@@ -2689,6 +2693,12 @@
 		(uuid "322f37a5-7c72-4920-8ce0-e1b56938e7b9")
 	)
 	(junction
+		(at 147.32 88.9)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "402204aa-009a-4956-8ba0-1925a29d61f5")
+	)
+	(junction
 		(at 46.99 99.06)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2749,10 +2759,10 @@
 		(uuid "ce7d21a2-f027-4aad-a3cb-d98412c8b1fa")
 	)
 	(junction
-		(at 228.6 133.35)
+		(at 229.87 133.35)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d4528fb2-64a3-4165-bc41-98fd22ce2e43")
+		(uuid "d087b0eb-cbae-40b3-bd30-1bafa822efee")
 	)
 	(junction
 		(at 38.1 152.4)
@@ -2767,10 +2777,10 @@
 		(uuid "e7227a39-db44-4a77-9d28-cac5d98caedf")
 	)
 	(junction
-		(at 59.69 134.62)
+		(at 166.37 88.9)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "eb31c445-2323-4dec-9666-9715c64b77ca")
+		(uuid "ec44b5b6-c1db-4108-be0e-00c89f07fbef")
 	)
 	(junction
 		(at 232.41 101.6)
@@ -2836,6 +2846,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 88.9) (xy 166.37 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "06e9bd15-b558-4324-8b7b-ef656c3e0449")
+	)
+	(wire
+		(pts
 			(xy 212.09 76.2) (xy 214.63 76.2)
 		)
 		(stroke
@@ -2866,7 +2886,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 140.97) (xy 228.6 133.35)
+			(xy 229.87 140.97) (xy 229.87 133.35)
 		)
 		(stroke
 			(width 0)
@@ -2926,6 +2946,16 @@
 	)
 	(wire
 		(pts
+			(xy 229.87 133.35) (xy 241.3 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17b5dc01-6414-4467-b12b-3657949c3319")
+	)
+	(wire
+		(pts
 			(xy 232.41 81.28) (xy 232.41 82.55)
 		)
 		(stroke
@@ -2976,23 +3006,13 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 133.35) (xy 228.6 133.35)
+			(xy 207.01 133.35) (xy 229.87 133.35)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "28add47a-e8a6-4f02-912a-e4e3b7b255df")
-	)
-	(wire
-		(pts
-			(xy 228.6 133.35) (xy 231.14 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "29a4c7ed-b1a4-4c44-88e6-3c1aea813e44")
 	)
 	(wire
 		(pts
@@ -3166,6 +3186,26 @@
 	)
 	(wire
 		(pts
+			(xy 166.37 88.9) (xy 166.37 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5479a0b4-27f5-43e5-bac7-fa8fa430e4d9")
+	)
+	(wire
+		(pts
+			(xy 147.32 88.9) (xy 147.32 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "584ca7b4-227c-455c-84eb-0d7cc6decbd2")
+	)
+	(wire
+		(pts
 			(xy 232.41 100.33) (xy 232.41 101.6)
 		)
 		(stroke
@@ -3214,16 +3254,6 @@
 		)
 		(uuid "5c323a29-39c6-4f79-b447-6cb4f7c27531")
 	)
-	(bus
-		(pts
-			(xy 59.69 133.35) (xy 59.69 134.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6438d320-f757-4301-a051-e7c3d63f140b")
-	)
 	(wire
 		(pts
 			(xy 173.99 76.2) (xy 173.99 110.49)
@@ -3243,16 +3273,6 @@
 			(type default)
 		)
 		(uuid "6634a31b-23d9-4004-8eb8-7ae6fe0767bc")
-	)
-	(bus
-		(pts
-			(xy 59.69 134.62) (xy 72.39 134.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "66a9fcb3-870f-459d-9900-6b8ad19eb1f4")
 	)
 	(wire
 		(pts
@@ -3496,16 +3516,6 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 133.35) (xy 241.3 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "90706791-5a7f-4e4e-983f-28b558cf16a1")
-	)
-	(wire
-		(pts
 			(xy 45.72 137.16) (xy 45.72 125.73)
 		)
 		(stroke
@@ -3553,16 +3563,6 @@
 			(type default)
 		)
 		(uuid "99496893-451d-493b-ba92-10d8955ce8c2")
-	)
-	(wire
-		(pts
-			(xy 241.3 139.7) (xy 241.3 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9b6b012e-f991-458c-97f8-92e123dde7af")
 	)
 	(wire
 		(pts
@@ -3646,7 +3646,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 92.71) (xy 147.32 95.25)
+			(xy 147.32 81.28) (xy 147.32 88.9)
 		)
 		(stroke
 			(width 0)
@@ -3686,7 +3686,17 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 66.04) (xy 166.37 107.95)
+			(xy 241.3 139.7) (xy 241.3 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0755640-b6ca-4cae-8556-1a851952bc58")
+	)
+	(wire
+		(pts
+			(xy 166.37 66.04) (xy 166.37 88.9)
 		)
 		(stroke
 			(width 0)
@@ -3696,7 +3706,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 148.59) (xy 228.6 156.21)
+			(xy 229.87 148.59) (xy 229.87 156.21)
 		)
 		(stroke
 			(width 0)
@@ -3756,7 +3766,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 156.21) (xy 241.3 156.21)
+			(xy 229.87 156.21) (xy 241.3 156.21)
 		)
 		(stroke
 			(width 0)
@@ -3793,6 +3803,16 @@
 			(type default)
 		)
 		(uuid "d8d993bb-ee12-4f4a-97f2-0e4c50e6fcfb")
+	)
+	(wire
+		(pts
+			(xy 147.32 88.9) (xy 153.67 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ddcf1d07-fe47-4050-9231-ddd6e164d71c")
 	)
 	(wire
 		(pts
@@ -3916,7 +3936,7 @@
 	)
 	(bus
 		(pts
-			(xy 58.42 134.62) (xy 59.69 134.62)
+			(xy 58.42 134.62) (xy 72.39 134.62)
 		)
 		(stroke
 			(width 0)
@@ -3995,18 +4015,6 @@
 			(type none)
 		)
 		(uuid b097da7f-7cf2-4034-9033-040a920e2b49)
-	)
-	(rectangle
-		(start 15.24 15.24)
-		(end 93.98 55.88)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid be714fd0-320f-4dde-8f57-84d97c6fb5ad)
 	)
 	(text "ICSP"
 		(exclude_from_sim no)
@@ -4139,7 +4147,7 @@
 		(uuid "69238a0c-e127-409d-a2e7-c2ae3852aebc")
 	)
 	(label "Twisted Pair"
-		(at 59.69 133.35 0)
+		(at 59.69 134.62 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4806,7 +4814,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "220V~ IN"
+		(property "Value" "Cooller supply IN"
 			(at 278.892 64.008 0)
 			(effects
 				(font
@@ -4929,7 +4937,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 228.6 144.78 0)
+		(at 229.87 144.78 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4937,7 +4945,7 @@
 		(dnp no)
 		(uuid "6e0ec733-61da-4650-8ccf-8472818282f0")
 		(property "Reference" "C2"
-			(at 231.648 144.526 0)
+			(at 232.918 144.526 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4946,7 +4954,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 229.87 147.32 0)
+			(at 231.14 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4955,7 +4963,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 229.5652 148.59 0)
+			(at 230.8352 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4964,7 +4972,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 228.6 144.78 0)
+			(at 229.87 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4973,7 +4981,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 228.6 144.78 0)
+			(at 229.87 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5084,8 +5092,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "Motor"
-			(at 279.146 94.996 0)
+		(property "Value" "Cooller supply OUT"
+			(at 277.622 106.426 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5205,7 +5213,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 147.32 92.71 0)
+		(at 147.32 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5214,7 +5222,7 @@
 		(fields_autoplaced yes)
 		(uuid "99b2c901-53bf-4649-9715-19339b841430")
 		(property "Reference" "#PWR1"
-			(at 147.32 96.52 0)
+			(at 147.32 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5223,7 +5231,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 147.32 87.63 0)
+			(at 147.32 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5231,7 +5239,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 147.32 92.71 0)
+			(at 147.32 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5240,7 +5248,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 147.32 92.71 0)
+			(at 147.32 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5249,7 +5257,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 147.32 92.71 0)
+			(at 147.32 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5466,75 +5474,6 @@
 			(project "fridgecon"
 				(path "/51ae1284-16dc-47e6-a252-a589b4dac501"
 					(reference "R3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 234.95 133.35 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b1723e61-9fa8-4664-a6a9-aceb130d1ca5")
-		(property "Reference" "R11"
-			(at 236.474 136.144 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1K"
-			(at 236.474 138.684 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 235.204 132.334 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 234.95 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 237.236 129.794 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "61f373c7-b4de-4d0e-8a45-78109bfde36d")
-		)
-		(pin "2"
-			(uuid "dedc2884-5e0d-4f5b-b9cf-9e9f60747b01")
-		)
-		(instances
-			(project "fridgecon"
-				(path "/51ae1284-16dc-47e6-a252-a589b4dac501"
-					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -5782,6 +5721,75 @@
 			(project ""
 				(path "/51ae1284-16dc-47e6-a252-a589b4dac501"
 					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 157.48 88.9 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bddb313f-3ea9-447f-a500-44af8d4d1e22")
+		(property "Reference" "R11"
+			(at 154.94 86.106 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100K"
+			(at 154.94 83.566 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 157.226 89.916 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 157.48 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 155.194 92.456 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ce32e41e-448e-44ee-b4ed-2f1b1c7577f8")
+		)
+		(pin "2"
+			(uuid "faae0643-4d2e-4a13-a28b-a1c1729b2569")
+		)
+		(instances
+			(project "fridgecon"
+				(path "/51ae1284-16dc-47e6-a252-a589b4dac501"
+					(reference "R11")
 					(unit 1)
 				)
 			)
