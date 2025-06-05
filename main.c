@@ -18,7 +18,7 @@ static signed char _offtemp;
 #define LED_TOGGLE(s) _LED ^= 1
 #define BLINKWAIT(n, i, c) \
     _blinking = true; \
-    timer_async((n) * 2, TICKS(i), c); \
+    timer_async((n), TICKS(i), c); \
     while (_blinking) _delaywdt(MILI(50))
 
 
@@ -159,6 +159,7 @@ normal:
     _delaywdt(SECOND(2));
     BLINKWAIT(MOTORON_DELAY_S * 10, MILI(100), _blink);
     if (_sample()) {
+        BLINKWAIT(MOTOROFF_DELAY_S * 5, MILI(200), _blink);
         goto normal;
     }
 
@@ -169,7 +170,7 @@ normal:
     }
     offtemp_save(_offtemp);
     LED_SET(OFF);
-    BLINKWAIT(2, MILI(50), _blink);
+    BLINKWAIT(4, MILI(50), _blink);
     _delaywdt(MILI(700));
     timer_async((unsigned int)abs(_offtemp) * 2, TICKS(MILI(300)), _tune);
     while (_tunning) {

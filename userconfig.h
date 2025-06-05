@@ -6,7 +6,6 @@
 #include "helpers.h"
 
 
-
 /* ADC volatge refrence defined by D1 and pair of (R6, R7) voltage devider. */
 #define VREF_MV 476
 
@@ -34,7 +33,11 @@
 
 
 /* delay before turn the compressor on after power outage and etc. */
-#define MOTORON_DELAY_S 30
+#define MOTORON_DELAY_S (6 * 60)
+
+
+/* delay before turn the compressor off after the OFFTEMP has reached. */
+#define MOTOROFF_DELAY_S (6 * 60)
 
 
 #endif  // USERCONFIG_H_
