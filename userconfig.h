@@ -37,7 +37,7 @@
 
 
 /* delay before turn the compressor off after the OFFTEMP has reached. */
-#define MOTOROFF_DELAY_S (6 * 60)
+#define MOTOROFF_DELAY_S (10 * 60)
 
 
 #endif  // USERCONFIG_H_
