@@ -29,7 +29,7 @@
 
 
 /* temperature to turn the fridge compressor on */
-#define ONTEMP 4
+#define ONTEMP 1
 
 
 /* delay before turn the compressor on after power outage and etc. */
