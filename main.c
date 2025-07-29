@@ -9,7 +9,7 @@
 static __bit _blinking;
 static __bit _tunning;
 static volatile signed char temp;
-static signed char _offtemp;
+static signed char _offtemp = OFFTEMP_DEFAULT;
 #define _RELAY GP4
 #define _LED GP5
 #define _TBTN GP3
@@ -74,7 +74,7 @@ _init() {
      */
     INTCON = 0b11001000;
 
-    _offtemp = offtemp_load();
+    // _offtemp = offtemp_load();
     timer_init();
 
     ADIE = 1;
@@ -159,22 +159,22 @@ normal:
     _delaywdt(SECOND(2));
     BLINKWAIT(MOTORON_DELAY_S * 10, MILI(100));
     if (_sample()) {
-        BLINKWAIT(MOTOROFF_DELAY_S * 5, MILI(200));
+        BLINKWAIT(MOTOROFF_DELAY_S * 3, MILI(400));
         goto normal;
     }
 
-    /* tunning */
-    _offtemp--;
-    if (_offtemp < OFFTEMP_MIN) {
-        _offtemp = OFFTEMP_MAX;
-    }
-    offtemp_save(_offtemp);
-    LED_SET(OFF);
-    BLINKWAIT(4, MILI(50));
-    _delaywdt(MILI(700));
-    timer_async((unsigned int)abs(_offtemp) * 2, TICKS(MILI(300)), _tune);
-    while (_tunning) {
-        _delaywdt(MILI(100));
-    }
+    // /* tunning */
+    // _offtemp--;
+    // if (_offtemp < OFFTEMP_MIN) {
+    //     _offtemp = OFFTEMP_MAX;
+    // }
+    // offtemp_save(_offtemp);
+    // LED_SET(OFF);
+    // BLINKWAIT(4, MILI(50));
+    // _delaywdt(MILI(700));
+    // timer_async((unsigned int)abs(_offtemp) * 2, TICKS(MILI(300)), _tune);
+    // while (_tunning) {
+    //     _delaywdt(MILI(100));
+    // }
     goto normal;
 }
