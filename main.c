@@ -158,10 +158,11 @@ normal:
     LED_SET(OFF);
     _delaywdt(SECOND(2));
     BLINKWAIT(MOTORON_DELAY_S * 10, MILI(100));
-    if (_sample()) {
-        BLINKWAIT(MOTOROFF_DELAY_S * 3, MILI(400));
-        goto normal;
-    }
+
+    MOTOR_SET(ON);
+    _delaywdt(SECOND(2));
+    BLINKWAIT(MOTORON_S * 5, MILI(200));
+    goto normal;
 
     // /* tunning */
     // _offtemp--;

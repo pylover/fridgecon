@@ -34,6 +34,7 @@
 
 /* delay before turn the compressor on after power outage and etc. */
 #define MOTORON_DELAY_S (6 * 60)
+#define MOTORON_S (20 * 60)
 
 
 /* delay before turn the compressor off after the OFFTEMP has reached. */
